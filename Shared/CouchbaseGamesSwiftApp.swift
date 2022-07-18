@@ -9,6 +9,17 @@ import SwiftUI
 
 @main
 struct CouchbaseGamesSwiftApp: App {
+    
+    init() {
+        let helloWorld = HelloWorld()
+        helloWorld.helloCBL()
+        
+        let highScores = HighScores()
+        highScores.outputContents()
+        
+        let highScoresReplication = HighScoresReplication()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
