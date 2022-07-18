@@ -12,12 +12,12 @@ struct CouchbaseGamesSwiftApp: App {
     
     init() {
         let helloWorld = HelloWorld()
-        helloWorld.helloCBL()
+        helloWorld.helloCBL() 
         
-        let highScores = HighScores()
-        highScores.outputContents()
-        
-        let highScoresReplication = HighScoresReplication()
+//        let highScores = HighScores()
+//        highScores.outputContents()
+//
+//        let highScoresReplication = HighScoresReplication()
     }
     
     var body: some Scene {

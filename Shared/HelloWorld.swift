@@ -39,7 +39,7 @@ class HelloWorld {
             print("Error locating document with ID: \(docID)")
             return
         }
-        print("The retrieved document contains: \(doc)")
+        print("The retrieved document contains: \(doc.toDictionary())")
     }
     
     private func updateDocument(database: Database, docID: String) {
