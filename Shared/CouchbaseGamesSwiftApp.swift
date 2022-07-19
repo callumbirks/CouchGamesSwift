@@ -12,7 +12,7 @@ struct CouchbaseGamesSwiftApp: App {
     
     init() {
         let helloWorld = HelloWorld()
-        helloWorld.helloCBL() 
+        helloWorld.helloCBL()
         
 //        let highScores = HighScores()
 //        highScores.outputContents()

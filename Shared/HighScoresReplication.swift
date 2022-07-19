@@ -10,32 +10,25 @@ import CouchbaseLiteSwift
 
 class HighScoresReplication {
     
-    let push: Replicator
-    let pull: Replicator
+    let replicator: Replicator
     
-    // Initializes push and pull replicators and starts a replication on each
+    // Initializes replicator and starts a push and pull sync
     init() {
         let database = DBManager.shared.database
         let target = URLEndpoint(url: DBManager.syncURL)
-        // Create a single listener that can be used in both push and pull replicators to avoid repeated code
         let listener: (ReplicatorChange) -> Void = { change in
             let total: UInt64 = change.status.progress.total
             let completed: UInt64 = change.status.progress.completed
-            print("\(change.replicator.config.replicatorType) replication: \(completed)/\(total)")
+            print("Replication: \(completed)/\(total)")
+            print(change.status)
         }
-        self.push = Replicator(database: database, target: target, type: .push, listener: listener)
-        self.pull = Replicator(database: database, target: target, type: .pull, listener: listener)
+        self.replicator = Replicator(database: database, target: target, type: .pushAndPull, listener: listener)
         
-        startPush()
-        startPull()
+        self.startSync()
     }
     
-    func startPush() {
-        self.push.start()
-    }
-    
-    func startPull() {
-        self.pull.start()
+    func startSync() {
+        replicator.start()
     }
 }
 
@@ -44,6 +37,8 @@ extension Replicator {
     convenience init(database: Database, target: URLEndpoint, type: ReplicatorType, listener: @escaping (ReplicatorChange) -> Void) {
         var config = ReplicatorConfiguration(database: database, target: target)
         config.replicatorType = type
+        config.authenticator = BasicAuthenticator(username: "bork",
+                                                  password: "password")
         self.init(config: config)
         self.addChangeListener(listener)
     }

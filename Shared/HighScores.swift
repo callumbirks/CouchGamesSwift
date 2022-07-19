@@ -92,7 +92,7 @@ class HighScores {
             }
             
             mutableDoc.setNumber(Int.random(in: 1...1000000) as NSNumber, forKey: "score")
-            mutableDoc.setString("2018-10-01", forKey: "date")
+            mutableDoc.setDate(Date.now, forKey: "date")
             
             do {
                 try database.saveDocument(mutableDoc)

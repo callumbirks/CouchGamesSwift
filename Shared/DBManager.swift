@@ -20,7 +20,7 @@ class DBManager {
         }
     }
     static let dbname: String = "couchbasegames"
-    static let syncURL: URL = URL(string: "ws://locahost:4984/couchbasegames")!
+    static let syncURL: URL = URL(string: "ws://localhost:4984/couchbasegames")!
     // A singleton object to access the database without re-opening it constantly
     static let shared: DBManager = DBManager(dbname)
 }
